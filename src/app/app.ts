@@ -1,12 +1,19 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component, HostListener, ViewChild } from '@angular/core';
+import { BsDatepickerDirective, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true, // مهم جدًا
+  imports: [BsDatepickerModule, CommonModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css'], // جمع مش مفرد
 })
 export class App {
-  protected readonly title = signal('ToDo');
+  @ViewChild(BsDatepickerDirective, { static: false }) datepicker?: BsDatepickerDirective;
+
+  @HostListener('window:scroll')
+  onScrollEvent() {
+    this.datepicker?.hide();
+  }
 }

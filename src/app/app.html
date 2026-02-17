@@ -2,32 +2,58 @@
   <div class="row">
     <div class="col-12"><h1>Hello , Start planning today</h1></div>
   </div>
-  <div class="row">
-    <div class="col-3 px-4 left">
-      <input placeholder="Task Starting Date" class="form-control" #dp="bsDatepicker" bsDatepicker />
+  <div class="row justify-content-center">
+    <div class="col-4 px-4 left">
+      <h1>{{ bsInlineValue | date: 'EEEE' }}</h1>
+      <h3 class="my-4">{{ bsInlineValue | date: 'EEE, d MMMM yyyy' }}</h3>
+
+      <bs-datepicker-inline
+        [(bsValue)]="bsInlineValue"
+        [bsConfig]="{ isAnimated: false }"
+      >
+      </bs-datepicker-inline>
     </div>
-    <div class="col-9 p-0 d-flex justify-content-start">
-      <div class="container title-con m-0 ">
+    <div class="col-8 p-0 d-flex justify-content-start right">
+      <div class="container title-con m-0">
         <div class="row">
           <div class="col-3">
-            <input type="text" placeholder="Task Title" class="w-100" />
+            <input type="text" placeholder="Task Title" class="w-100" [(ngModel)]="newtask" />
           </div>
           <div class="col-7 px-0">
-            <input type="text" placeholder="Task Detail" class="w-100" />
+            <input type="text" placeholder="Task Detail" class="w-100" [(ngModel)]="newdes" />
           </div>
           <div class="col-2">
-            <button class="add">
-              <i class="bi bi-plus-circle d-flex justify-content-center align-items-center"></i>
+            <button class="add" (click)="add()">
+              @if (isedit === false) {
+                <i class="bi bi-plus-circle d-flex justify-content-center align-items-center"></i>
+              } @else {
+                <i class="bi bi-pencil-square"></i>
+              }
             </button>
           </div>
+        </div>
+        <div class="row">
+          @for (t of tasks; track $index) {
+            <div class="col-3">
+              <div class="card d-flex flex-row align-items-center" style="width: 18rem">
+                <div class="card-body w-50">
+                  <h5 class="card-title">{{ t.title }}</h5>
+                  <p class="card-text">{{ t.detail }}</p>
+                  <p class="card-text">Starting Date: {{ t.date }}</p>
+                  <div class="d-flex justify-content-around"></div>
+                </div>
+                <div class="w-25 d-flex flex-column">
+                  <button class="edi" (click)="edit($index, t)">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button class="rem" (click)="remove($index)"><i class="bi bi-trash3"></i></button>
+                  <button class="comp"><i class="bi bi-check2-circle"></i></button>
+                </div>
+              </div>
+            </div>
+          }
         </div>
       </div>
     </div>
   </div>
-  <!-- bottom part  -->
-   <div class="container">
-    <div class="row">
-      <div class="col-3"></div>
-    </div>
-   </div>
 </div>

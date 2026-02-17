@@ -1,6 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'im';
+  src: url('../public/font/IslandMoments-Regular.ttf') format('truetype');
+}
+
 bs-datepicker-container {
   display: inline-block !important;
   position: absolute;
-  left: 30px !important;
+  left: 176px !important;
+  top: 150px;
+}
+.bs-datepicker-head {
+  background: transparent !important;
+}
+.next,
+.previous,
+.current {
+  color: black !important;
+  font-size: 18px;
+  font-family: cursive;
+}
+.week .ng-star-inserted {
+  color: white !important;
+  background: black;
+  /* border-radius: 10px; */
+  margin-bottom: 10px;
+}
+.bs-datepicker-body table td span {
+  font-size: 15px !important;
+}
+/* لو الأسبوع يبدأ بالأحد */
+.bs-datepicker table tbody tr td:nth-child(8),
+.bs-datepicker table tbody tr td:nth-child(7) {
+  color: #f23834;
+  font-weight: bold;
+}
+.theme-green .bs-datepicker-body table td span.selected,
+.theme-green .bs-datepicker-body table td[class*='select-'] span:after {
+  background-color: #f87777 !important;
+  border-radius: 50%;
+  color: white;
 }

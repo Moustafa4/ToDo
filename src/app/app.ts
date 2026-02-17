@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BsDatepickerDirective, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { enGbLocale } from 'ngx-bootstrap/locale';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
@@ -21,11 +21,15 @@ export class App {
   isedit = false;
 
   bsConfig = {
-    firstDayOfWeek: 0,
+    firstDayOfWeek: 6,
+    showWeekNumbers: true,
+    isAnimated: false,
   };
-  
 
-  constructor(private localeservice: BsLocaleService) {
+  constructor(
+    private localeservice: BsLocaleService,
+    private cdr: ChangeDetectorRef,
+  ) {
     this.localeservice.use('en-gb');
   }
 
@@ -54,13 +58,13 @@ export class App {
   }
   remove(index: number) {
     this.tasks.splice(index, 1);
+    this.cdr.detectChanges();
   }
   edit(index: number, taskedit: { title: string; detail: string; date: string }) {
-      this.newtask = taskedit.title;
-      this.newdes = taskedit.detail;
-      this.bsInlineValue = new Date(taskedit.date);
-      this.editingIndex = index;
-      this.isedit = true;
-   
+    this.newtask = taskedit.title;
+    this.newdes = taskedit.detail;
+    this.bsInlineValue = new Date(taskedit.date);
+    this.editingIndex = index;
+    this.isedit = true;
   }
 }

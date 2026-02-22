@@ -1,3 +1,20 @@
 {
-  "todo": [{ "title": "dsdsdsd" }]
+  "todo": [
+    {
+      "id": 1,
+      "title": "Task 1",
+      "detials": "Detail 1",
+      "iscomp": false,
+      "isedit": false,
+      "date": "2026-02-22"
+    },
+    {
+      "id": 2,
+      "title": "Task 2",
+      "detials": "Detail 2",
+      "iscomp": true,
+      "isedit": false,
+      "date": "2026-02-23"
+    }
+  ]
 }

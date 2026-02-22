@@ -33,20 +33,20 @@
           </div>
         </div>
         <div class="row">
-          @for (t of tasks; track $index) {
+          @for (t of _todo(); track t.id) {
             <div class="col-3">
               <div class="card d-flex flex-row align-items-center" style="width: 18rem">
                 <div class="card-body w-50">
                   <h5 class="card-title">{{ t.title }}</h5>
-                  <p class="card-text">{{ t.detail }}</p>
+                  <p class="card-text">{{ t.detials }}</p>
                   <p class="card-text">Starting Date: {{ t.date }}</p>
                   <div class="d-flex justify-content-around"></div>
                 </div>
                 <div class="w-25 d-flex flex-column">
-                  <button class="edi" (click)="edit($index, t)">
+                  <button class="edi" >
                     <i class="bi bi-pencil-square"></i>
                   </button>
-                  <button class="rem" (click)="remove($index)"><i class="bi bi-trash3"></i></button>
+                  <button class="rem"><i class="bi bi-trash3"></i></button>
                   <button class="comp"><i class="bi bi-check2-circle"></i></button>
                 </div>
               </div>

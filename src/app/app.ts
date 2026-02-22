@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, HostListener, inject, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -20,13 +27,18 @@ defineLocale('en-gb', enGbLocale);
   styleUrls: ['./app.css'],
 })
 export class App {
-  private todoserv = inject(Todo);
-  private $todo = this.todoserv.gettodos().pipe(map((to) => to ?? ([] as Itodo[])));
-  _todo = toSignal(this.$todo, { initialValue: [] as Itodo[] });
-  
+  // calender
   bsInlineValue: Date = new Date();
   editingIndex: number | null = null;
 
+  // injection
+
+  private todoserv = inject(Todo);
+  private $todo = this.todoserv.gettodos().pipe(map((to) => to ?? ([] as Itodo[])));
+  _todo = toSignal(this.$todo, { initialValue: [] as Itodo[] });
+
+  todos: Itodo[] = [];
+  newtodo: Itodo = {} as Itodo;
   isedit = false;
 
   bsConfig = {
